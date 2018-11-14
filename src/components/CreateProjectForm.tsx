@@ -7,10 +7,7 @@ import {addProjectAction} from "../actions/projects";
 const styles = (theme: any) => ({
     button: {
         marginTop: theme.spacing.unit,
-    },
-    input: {
-        display: 'none',
-    },
+    }
 });
 
 interface IProps {
