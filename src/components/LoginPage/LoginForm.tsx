@@ -72,16 +72,33 @@ class LoginForm extends React.Component<IProps & WithStyles, IState> {
                                 variant="outlined"
                             />
 
-                            <Button
-                                size={"large"}
-                                onClick={this.login}
-                                fullWidth={true}
-                                variant="outlined"
-                                color="default"
-                                className={this.props.classes.submitButtonMarginTop}
-                            >
-                                Login
-                            </Button>
+                            <Grid container={true}>
+                                <Grid item={true} xs={4}>
+                                    <Button
+                                        size={"large"}
+                                        onClick={this.createAccount}
+                                        fullWidth={true}
+                                        variant="outlined"
+                                        color="default"
+                                        className={this.props.classes.submitButtonMarginTop}
+                                    >
+                                        Create Account
+                                    </Button>
+                                </Grid>
+                                <Grid item={true} xs={4}/>
+                                <Grid item={true} xs={4}>
+                                    <Button
+                                        size={"large"}
+                                        onClick={this.login}
+                                        fullWidth={true}
+                                        variant="outlined"
+                                        color="primary"
+                                        className={this.props.classes.submitButtonMarginTop}
+                                    >
+                                        Login
+                                    </Button>
+                                </Grid>
+                            </Grid>
                         </Paper>
                     </Grid>
                     <Grid item={true} xs={4} />
@@ -89,6 +106,10 @@ class LoginForm extends React.Component<IProps & WithStyles, IState> {
             </form>
         );
     }
+
+    private createAccount = () => {
+        console.log('create account pressed');
+    };
 
     private login = () => {
         this.props.login(this.state.username, this.state.password);
