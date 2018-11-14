@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import {Grid, Paper, Typography, WithStyles, withStyles} from "@material-ui/core";
 import { connect } from 'react-redux'
-import {Dispatch} from "redux";
+import {getProjectsAction} from "../actions/projects";
 
 
 const styles = (theme: any) => ({
@@ -15,14 +15,17 @@ const styles = (theme: any) => ({
 });
 
 interface IProps {
-    dispatch: Dispatch;
+    getProjectsAction: () => void;
     projects?: [];
 }
 
 class ProjectsList extends React.Component<IProps & WithStyles> {
 
+    public componentWillMount() {
+        this.props.getProjectsAction();
+    }
+
     public render() {
-        console.log('PROJECTS: ', this.props.projects);
         return (
             <Grid container={true} className={this.props.classes.paddingTop}>
 
@@ -58,12 +61,9 @@ class ProjectsList extends React.Component<IProps & WithStyles> {
 }
 
 export default connect((state: IState) => {
-    console.log('STATE: ', state);
     return {
         projects: state.projects
     };
-}, (dispatch) => {
-    return {
-        dispatch,
-    };
+}, {
+    getProjectsAction
 })(withStyles(styles)(ProjectsList));
