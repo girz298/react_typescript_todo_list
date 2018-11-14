@@ -11,7 +11,7 @@ const styles = (theme: any) => ({
         marginTop: theme.spacing.unit*40
     },
     button: {
-        marginTop: theme.spacing.unit,
+        marginTop: theme.spacing.unit*2,
     },
     paperPadding: {
         padding: theme.spacing.unit*4
@@ -30,7 +30,7 @@ interface IState {
     password: string;
 }
 
-class LoginForm extends React.Component<IProps & WithStyles & RouteComponentProps, IState> {
+class RegistrationForm extends React.Component<IProps & WithStyles & RouteComponentProps, IState> {
     public state: Readonly<IState> = {
         password: '',
         username: '',
@@ -47,7 +47,7 @@ class LoginForm extends React.Component<IProps & WithStyles & RouteComponentProp
                                 variant={"h4"}
                                 align={"center"}
                             >
-                                Welcome to To-Do
+                                Let's register you buddy
                             </Typography>
 
                             <TextField
@@ -73,18 +73,30 @@ class LoginForm extends React.Component<IProps & WithStyles & RouteComponentProp
                                 className={this.props.classes.button}
                                 variant="outlined"
                             />
+                            <TextField
+
+                                fullWidth={true}
+                                label="Repeat password*"
+                                name="repeat_password"
+                                type={"password"}
+                                required={true}
+                                value={this.state.password}
+                                onChange={this.handleChangePassword}
+                                className={this.props.classes.button}
+                                variant="outlined"
+                            />
 
                             <Grid container={true}>
                                 <Grid item={true} xs={4}>
                                     <Button
                                         size={"large"}
-                                        onClick={this.goToRegisterPage}
+                                        onClick={this.backToLoginPage}
                                         fullWidth={true}
                                         variant="outlined"
                                         color="default"
                                         className={this.props.classes.submitButtonMarginTop}
                                     >
-                                        Create Account
+                                        Back&nbsp;to&nbsp;login&nbsp;page
                                     </Button>
                                 </Grid>
                                 <Grid item={true} xs={4}/>
@@ -97,7 +109,7 @@ class LoginForm extends React.Component<IProps & WithStyles & RouteComponentProp
                                         color="primary"
                                         className={this.props.classes.submitButtonMarginTop}
                                     >
-                                        Login
+                                        Register
                                     </Button>
                                 </Grid>
                             </Grid>
@@ -109,8 +121,8 @@ class LoginForm extends React.Component<IProps & WithStyles & RouteComponentProp
         );
     }
 
-    private goToRegisterPage = () => {
-        this.props.history.push(GuestRoutes.REGISTRATION_PAGE);
+    private backToLoginPage = () => {
+        this.props.history.push(GuestRoutes.LOGIN_PAGE);
     };
 
     private login = () => {
@@ -129,4 +141,4 @@ class LoginForm extends React.Component<IProps & WithStyles & RouteComponentProp
 
 export default withRouter(connect(null, {
     login: loginAction
-})(withStyles(styles)(LoginForm)));
+})(withStyles(styles)(RegistrationForm)));
