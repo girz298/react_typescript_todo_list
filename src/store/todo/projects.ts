@@ -1,4 +1,4 @@
-import Project from "../../action_types/project";
+import { Project } from "../../action_types/project";
 
 const defaultAction: IAction = {
     payload: [],

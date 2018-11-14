@@ -1,4 +1,4 @@
-import Project from "../action_types/project";
+import { Project } from "../action_types/project";
 import {Dispatch} from "redux";
 import {getProjects} from "../api/requests/projects";
 
