@@ -3,15 +3,18 @@ const defaultAction: IAction = {
     type: 'default'
 };
 
-export default function reduce( initialState= {},action: IAction = defaultAction) {
+const initState: IProject[] = [];
+
+export default function reduce( state: IProject[] = initState, action: IAction = defaultAction) {
     switch (action.type) {
         case 'great':
+            const newState = [...state, ...action.payload];
             console.log('GREAT ACTION WORKED');
-            return initialState;
+            return newState;
         case 'default':
             console.log('Default ACTION WORKED');
-            return initialState;
+            return state;
     }
 
-    return initialState;
+    return state;
 }

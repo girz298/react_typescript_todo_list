@@ -1,8 +1,9 @@
 import * as React from 'react';
 
-import {Button, Grid, Paper, WithStyles, withStyles} from "@material-ui/core";
+import {Button, Grid, WithStyles, withStyles} from "@material-ui/core";
 import { connect } from 'react-redux'
 import {Dispatch} from "redux";
+import ProjectsList from "./ProjectsList";
 
 
 const styles = (theme: any) => ({
@@ -20,15 +21,9 @@ class Root extends React.Component<{
 
     public render() {
         return (
-            <Grid container={true}>
+            <Grid container={true} spacing={8}>
                 <Grid item={true} xs={4} />
                 <Grid item={true} xs={4}>
-                    <Paper>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias commodi
-                        deleniti doloribus earum error, est explicabo laudantium nam perferendis quas quisquam,
-                        sint sit vitae voluptatibus.
-                    </Paper>
-
                     <Button
                         onClick={this.draw}
                         fullWidth={true}
@@ -38,7 +33,7 @@ class Root extends React.Component<{
                     >
                         Dispatch
                     </Button>
-
+                    <ProjectsList />
                 </Grid>
                 <Grid item={true} xs={4} />
             </Grid>
@@ -47,7 +42,11 @@ class Root extends React.Component<{
 
     private draw = () => {
         this.props.dispatch({
-            payload: [],
+            payload: [
+                {name: 'payload1'},
+                {name: 'payload2'},
+                {name: 'payload3'}
+            ],
             type: 'great'
         });
     }
