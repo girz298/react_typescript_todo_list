@@ -4,7 +4,6 @@ import {Grid} from "@material-ui/core";
 import ProjectsList from "./ProjectsList";
 import CreateProjectForm from "./CreateProjectForm";
 
-
 class Root extends React.Component {
 
     public render() {

@@ -1,11 +1,11 @@
 import * as React from 'react';
 
-import {Route, Switch} from "react-router";
+import {Route, RouteComponentProps, Switch, withRouter} from "react-router";
 import Root from "./Root";
 import LoginForm from "./LoginPage/LoginForm";
 
 
-class MainRouter extends React.Component {
+class MainRouter extends React.Component<RouteComponentProps> {
     public render() {
         return (
             <Switch>
@@ -17,4 +17,4 @@ class MainRouter extends React.Component {
     }
 }
 
-export default MainRouter;
+export default withRouter(MainRouter);
