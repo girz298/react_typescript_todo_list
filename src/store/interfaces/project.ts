@@ -1,3 +1,4 @@
 interface IProject {
-    name: string
+    id: number;
+    name: string;
 }

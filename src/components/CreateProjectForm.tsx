@@ -15,26 +15,41 @@ interface IProps {
 }
 
 interface IState {
-    projectName: string
+    projectId: number;
+    projectName: string;
 }
 
 class CreateProjectForm extends React.Component<IProps & WithStyles, IState> {
     public state: Readonly<IState> = {
-        projectName: ''
+        projectId: 0,
+        projectName: '',
     };
 
     public render() {
         return (
             <form noValidate={true} autoComplete="off">
                 <Grid container={true} spacing={8}>
-                    <Grid item={true} xs={12}>
+                    <Grid item={true} xs={2}>
+                        <TextField
+                            fullWidth={true}
+                            id="outlined-name"
+                            label="Id"
+                            name="projectId"
+                            type="number"
+                            value={this.state.projectId}
+                            onChange={this.handleChangeId}
+                            className={this.props.classes.button}
+                            variant="outlined"
+                        />
+                    </Grid>
+                    <Grid item={true} xs={10}>
                             <TextField
                                 fullWidth={true}
                                 id="outlined-name"
                                 label="Name"
                                 name="projectName"
                                 value={this.state.projectName}
-                                onChange={this.handleChange}
+                                onChange={this.handleChangeName}
                                 className={this.props.classes.button}
                                 variant="outlined"
                             />
@@ -42,7 +57,7 @@ class CreateProjectForm extends React.Component<IProps & WithStyles, IState> {
                     <Grid item={true} xs={12}>
                         <Button
                             size={"large"}
-                            onClick={this.draw}
+                            onClick={this.saveProject}
                             fullWidth={true}
                             variant="outlined"
                             color="primary"
@@ -56,13 +71,21 @@ class CreateProjectForm extends React.Component<IProps & WithStyles, IState> {
         );
     }
 
-    private draw = () => {
-        this.props.addProject({name: this.state.projectName});
+    private saveProject = () => {
+        this.props.addProject({
+            id: this.state.projectId,
+            name: this.state.projectName,
+        });
     };
 
-    private handleChange = (event: any) => {
+
+    private handleChangeId = (event: any) => {
+        this.setState({projectId: event.target.value});
+    };
+
+    private handleChangeName = (event: any) => {
         this.setState({projectName: event.target.value});
-    }
+    };
 }
 
 export default connect(null, {
