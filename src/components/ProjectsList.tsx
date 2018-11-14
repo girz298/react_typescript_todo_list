@@ -14,10 +14,12 @@ const styles = (theme: any) => ({
     },
 });
 
-class ProjectsList extends React.Component<{
+interface IProps {
     dispatch: Dispatch;
     projects?: [];
-} & WithStyles> {
+}
+
+class ProjectsList extends React.Component<IProps & WithStyles> {
 
     public render() {
         console.log('PROJECTS: ', this.props.projects);
