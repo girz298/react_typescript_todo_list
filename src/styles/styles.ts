@@ -8,10 +8,16 @@ export const guestFormsStyles = (theme: any) => ({
     formHeight: {
         height: theme.spacing.unit*35
     },
+    loginForm: {
+        marginTop: theme.spacing.unit*10
+    },
     paperPadding: {
         padding: theme.spacing.unit*4
     },
+    registerForm: {
+        marginTop: theme.spacing.unit*4
+    },
     submitButtonMarginTop: {
         marginTop: theme.spacing.unit*3
-    }
+    },
 });

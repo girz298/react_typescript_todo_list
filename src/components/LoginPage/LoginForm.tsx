@@ -2,7 +2,8 @@ import * as React from 'react';
 
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
 import {renderTextField} from "../../redux-material-bridge/text-field";
-import {Grid} from "@material-ui/core";
+import {Grid, WithStyles, withStyles} from "@material-ui/core";
+import {guestFormsStyles} from "../../styles/styles";
 
 export const FORM_NAME = 'LoginForm';
 
@@ -16,12 +17,12 @@ interface IProps {
 }
 
 
-class LoginForm extends React.Component<IProps & InjectedFormProps<{}, IProps>> {
+class LoginForm extends React.Component<IProps & InjectedFormProps<{}, IProps> & WithStyles> {
     public render() {
         return (
             <form className={this.props.className} onSubmit={this.props.handleSubmit}>
                 <Grid container={true} spacing={16}>
-                    <Grid item={true} xs={12}>
+                    <Grid item={true} xs={12} className={this.props.classes.loginForm}>
                         <Field
                             component={renderTextField}
                             label="Username *"
@@ -56,4 +57,4 @@ export default reduxForm<{}, IProps>({
         console.log(errors);
         return errors;
     }
-})(LoginForm);
+})(withStyles(guestFormsStyles)(LoginForm));
