@@ -1,6 +1,7 @@
 import * as React from 'react';
 
-import {TextField} from "@material-ui/core";
+import {FormHelperText, TextField} from "@material-ui/core";
+import {TextFieldProps} from "@material-ui/core/TextField";
 
 interface IReduxTextField {
     input?: any;
@@ -11,14 +12,18 @@ interface IReduxTextField {
     }
 }
 
-export const renderTextField = ({input, label, meta: { touched, error }, ...custom}: IReduxTextField) => {
+export const renderTextField = ({input, label, meta: { touched, error }, ...custom}: IReduxTextField & TextFieldProps) => {
     return (
         <TextField
-            hintText={label}
-            floatingLabelText={label}
-            errorText={touched && error}
+            label={label}
+            error={error && true}
             {...input}
             {...custom}
+            helperText={ error &&
+                <FormHelperText>
+                {error}
+                </FormHelperText>
+            }
         />
     );
 };
