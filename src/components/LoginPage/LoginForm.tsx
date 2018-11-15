@@ -1,13 +1,13 @@
 import * as React from 'react';
 
-import {Field, InjectedFormProps, reduxForm} from "redux-form";
+import {Field, FormErrors, InjectedFormProps, reduxForm} from "redux-form";
 import {renderTextField} from "../../redux-material-bridge/text-field";
 import {Grid, WithStyles, withStyles} from "@material-ui/core";
 import {guestFormsStyles} from "../../styles/styles";
 
 export const FORM_NAME = 'LoginForm';
 
-export interface IFormFields {
+export interface IFormFields extends FormErrors {
     username?: string;
     password?: string;
 }
