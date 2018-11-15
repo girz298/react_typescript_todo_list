@@ -10,21 +10,8 @@ import {submitForm, SubmitFormActionType} from "../../actions/forms";
 import {SubmissionError} from "redux-form";
 import {EMPTY_FIELD_ERROR} from "../../redux-material-bridge/text-field";
 import * as _ from 'lodash';
+import {guestFormsStyles} from "../../styles/styles";
 
-const styles = (theme: any) => ({
-    bigMarginTop: {
-        marginTop: theme.spacing.unit*30
-    },
-    button: {
-        marginTop: theme.spacing.unit*2,
-    },
-    paperPadding: {
-        padding: theme.spacing.unit*4
-    },
-    submitButtonMarginTop: {
-        marginTop: theme.spacing.unit*3
-    }
-});
 
 interface IProps {
     login: LoginActionType;
@@ -40,8 +27,8 @@ class RegistrationPage extends React.Component<IProps & WithStyles & RouteCompon
     public render() {
         return (
             <Grid container={true} className={this.props.classes.bigMarginTop}>
-                <Grid item={true} xs={4} />
-                <Grid item={true} xs={4}>
+                <Grid item={true} xs={12} md={4}/>
+                <Grid item={true} xs={12} md={4}>
                     <Paper className={this.props.classes.paperPadding}>
                         <Typography
                             variant={"h4"}
@@ -51,12 +38,12 @@ class RegistrationPage extends React.Component<IProps & WithStyles & RouteCompon
                         </Typography>
 
                         <RegistrationForm
-                            className={this.props.classes.button}
+                            className={this.props.classes.button + ' ' + this.props.classes.formHeight}
                             onSubmit={this.handleSubmit}
                         />
 
                         <Grid container={true}>
-                            <Grid item={true} xs={4}>
+                            <Grid item={true} xs={12} xl={4}>
                                 <Button
                                     size={"large"}
                                     onClick={this.backToLoginPage}
@@ -68,8 +55,8 @@ class RegistrationPage extends React.Component<IProps & WithStyles & RouteCompon
                                     Back&nbsp;to&nbsp;login&nbsp;page
                                 </Button>
                             </Grid>
-                            <Grid item={true} xs={4}/>
-                            <Grid item={true} xs={4}>
+                            <Grid item={true} xs={12} xl={4}/>
+                            <Grid item={true} xs={12} xl={4}>
                                 <Button
                                     size={"large"}
                                     onClick={this.register}
@@ -84,7 +71,7 @@ class RegistrationPage extends React.Component<IProps & WithStyles & RouteCompon
                         </Grid>
                     </Paper>
                 </Grid>
-                <Grid item={true} xs={4} />
+                <Grid item={true} xs={12} md={4}/>
             </Grid>
         );
     }
@@ -125,4 +112,4 @@ export default withRouter(connect(null, {
     login: loginAction,
     submitForm
 
-})(withStyles(styles)(RegistrationPage)));
+})(withStyles(guestFormsStyles)(RegistrationPage)));

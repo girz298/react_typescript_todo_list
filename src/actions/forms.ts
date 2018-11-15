@@ -4,9 +4,7 @@ import {ReturnDispatchType} from "../types/redux";
 
 export type SubmitFormActionType = (formName: string) => ReturnDispatchType;
 
-export const submitForm: SubmitFormActionType = (formName: string) => {
-    return (dispatch: Dispatch) => {
-        console.log('FORM "' + formName + '" REMOTELY SUBMITTED');
-        dispatch(submit(formName)) ;
-    }
+export const submitForm: SubmitFormActionType = (formName: string) => (dispatch: Dispatch) => {
+    console.log('FORM "' + formName + '" REMOTELY SUBMITTED');
+    dispatch(submit(formName)) ;
 };
