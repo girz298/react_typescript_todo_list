@@ -2,11 +2,11 @@ import * as React from 'react';
 
 import {Button, Grid, Paper, Typography, WithStyles, withStyles} from "@material-ui/core";
 import { connect } from 'react-redux'
-import {ILoginAction, loginAction} from "../../actions/user";
+import {LoginActionType, loginAction} from "../../actions/user";
 import {RouteComponentProps, withRouter} from "react-router";
 import {GuestRoutes} from "../../constants/urls";
 import RegistrationForm, {FORM_NAME} from "./RegistrationForm";
-import {submitForm, SubmitFormType} from "../../actions/forms";
+import {submitForm, SubmitFormActionType} from "../../actions/forms";
 
 const styles = (theme: any) => ({
     bigMarginTop: {
@@ -24,8 +24,8 @@ const styles = (theme: any) => ({
 });
 
 interface IProps {
-    login: ILoginAction;
-    submitForm: SubmitFormType;
+    login: LoginActionType;
+    submitForm: SubmitFormActionType;
 }
 
 interface IState {

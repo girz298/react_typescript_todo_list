@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import {Button, Grid, Paper, TextField, Typography, WithStyles, withStyles} from "@material-ui/core";
 import { connect } from 'react-redux'
-import {ILoginAction, loginAction} from "../../actions/user";
+import {LoginActionType, loginAction} from "../../actions/user";
 import {RouteComponentProps, withRouter} from "react-router";
 import {GuestRoutes} from "../../constants/urls";
 
@@ -22,7 +22,7 @@ const styles = (theme: any) => ({
 });
 
 interface IProps {
-    login: ILoginAction;
+    login: LoginActionType;
 }
 
 interface IState {
