@@ -24,7 +24,7 @@ class RegistrationForm extends React.Component<IProps & InjectedFormProps<{}, IP
                     <Grid item={true} xs={12}>
                         <Field
                         component={renderTextField}
-                        label="Username"
+                        label="Username *"
                         name="username"
                         type={"string"}
                         required={true}
@@ -35,7 +35,7 @@ class RegistrationForm extends React.Component<IProps & InjectedFormProps<{}, IP
                     <Grid item={true} xs={12}>
                         <Field
                             component={renderTextField}
-                            label="Password"
+                            label="Password *"
                             name="password"
                             type={"password"}
                             required={true}
@@ -46,7 +46,7 @@ class RegistrationForm extends React.Component<IProps & InjectedFormProps<{}, IP
                     <Grid item={true} xs={12}>
                         <Field
                             component={renderTextField}
-                            label="Repeat password"
+                            label="Repeat password *"
                             name="repeatPassword"
                             type={"password"}
                             required={true}
