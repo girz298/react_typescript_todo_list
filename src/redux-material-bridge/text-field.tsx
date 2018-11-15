@@ -12,18 +12,22 @@ interface IReduxTextField {
     }
 }
 
+export const EMPTY_FIELD_ERROR = 'Required';
+
 // TODO: Fix bug with <p> cannot appear as a descendant of <p>
 
 export const renderTextField = ({input, required, value, label, meta: { touched, error }, ...custom}: IReduxTextField & TextFieldProps) => {
+    const isRequired: boolean | undefined = (touched && required && !input.value);
+
     return (
         <TextField
             label={label}
-            error={!!error || (touched && required && !input.value)}
+            error={!!error || !!isRequired}
             {...input}
             {...custom}
-            helperText={ error && (
-                <FormHelperText error={!!error}>
-                    {error}
+            helperText={(error || !!isRequired) && (
+                <FormHelperText >
+                    {isRequired ? EMPTY_FIELD_ERROR : error}
                 </FormHelperText>
                 )
             }

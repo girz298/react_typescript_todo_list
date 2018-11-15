@@ -5,8 +5,11 @@ import { connect } from 'react-redux'
 import {LoginActionType, loginAction} from "../../actions/user";
 import {RouteComponentProps, withRouter} from "react-router";
 import {GuestRoutes} from "../../constants/urls";
-import RegistrationForm, {FORM_NAME} from "./RegistrationForm";
+import RegistrationForm, {FORM_NAME, IFormFields} from "./RegistrationForm";
 import {submitForm, SubmitFormActionType} from "../../actions/forms";
+import {SubmissionError} from "redux-form";
+import {EMPTY_FIELD_ERROR} from "../../redux-material-bridge/text-field";
+import * as _ from 'lodash';
 
 const styles = (theme: any) => ({
     bigMarginTop: {
@@ -34,11 +37,6 @@ interface IState {
 }
 
 class RegistrationPage extends React.Component<IProps & WithStyles & RouteComponentProps, IState> {
-    public state: Readonly<IState> = {
-        password: '',
-        username: '',
-    };
-
     public render() {
         return (
             <Grid container={true} className={this.props.classes.bigMarginTop}>
@@ -99,7 +97,25 @@ class RegistrationPage extends React.Component<IProps & WithStyles & RouteCompon
         this.props.submitForm(FORM_NAME);
     };
 
-    private handleSubmit = (values: any) => {
+    private handleSubmit = (values: IFormFields) => {
+        const errors: IFormFields = {};
+
+        if (!values.username) {
+            errors.username = EMPTY_FIELD_ERROR;
+        }
+
+        if (!values.password) {
+            errors.password = EMPTY_FIELD_ERROR;
+        }
+
+        if (!values.repeatPassword) {
+            errors.repeatPassword = EMPTY_FIELD_ERROR;
+        }
+
+        if (!_.isEmpty(errors)) {
+            throw new SubmissionError(errors);
+        }
+
         console.log(values);
     }
 

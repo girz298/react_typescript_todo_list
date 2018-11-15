@@ -6,7 +6,7 @@ import {Grid} from "@material-ui/core";
 
 export const FORM_NAME = 'RegistrationForm';
 
-interface IFormFields {
+export interface IFormFields {
     username?: string;
     password?: string;
     repeatPassword?: string;

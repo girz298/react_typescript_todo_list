@@ -5,14 +5,18 @@ import { connect } from 'react-redux'
 import {LoginActionType, loginAction} from "../../actions/user";
 import {RouteComponentProps, withRouter} from "react-router";
 import {GuestRoutes} from "../../constants/urls";
-import LoginForm from "./LoginForm";
+import LoginForm, {FORM_NAME, IFormFields} from "./LoginForm";
+import {submitForm, SubmitFormActionType} from "../../actions/forms";
+import {SubmissionError} from "redux-form";
+import {EMPTY_FIELD_ERROR} from "../../redux-material-bridge/text-field";
+import * as _ from 'lodash';
 
 const styles = (theme: any) => ({
     bigMarginTop: {
         marginTop: theme.spacing.unit*40
     },
     button: {
-        marginTop: theme.spacing.unit,
+        marginTop: theme.spacing.unit*2,
     },
     paperPadding: {
         padding: theme.spacing.unit*4
@@ -24,6 +28,7 @@ const styles = (theme: any) => ({
 
 interface IProps {
     login: LoginActionType;
+    submitForm: SubmitFormActionType;
 }
 
 interface IState {
@@ -32,59 +37,55 @@ interface IState {
 }
 
 class LoginPage extends React.Component<IProps & WithStyles & RouteComponentProps, IState> {
-    public state: Readonly<IState> = {
-        password: '',
-        username: '',
-    };
-
     public render() {
         return (
-            <form noValidate={true} autoComplete="off" className={this.props.classes.bigMarginTop}>
-                <Grid container={true}>
-                    <Grid item={true} xs={4} />
-                    <Grid item={true} xs={4}>
-                        <Paper className={this.props.classes.paperPadding}>
-                            <Typography
-                                variant={"h4"}
-                                align={"center"}
-                            >
-                                Welcome to To-Do
-                            </Typography>
+            <Grid container={true} className={this.props.classes.bigMarginTop}>
+                <Grid item={true} xs={4} />
+                <Grid item={true} xs={4}>
+                    <Paper className={this.props.classes.paperPadding}>
+                        <Typography
+                            variant={"h4"}
+                            align={"center"}
+                        >
+                            Welcome to To-Do
+                        </Typography>
 
-                            <LoginForm />
+                        <LoginForm
+                            className={this.props.classes.button}
+                            onSubmit={this.handleSubmit}
+                        />
 
-                            <Grid container={true}>
-                                <Grid item={true} xs={4}>
-                                    <Button
-                                        size={"large"}
-                                        onClick={this.goToRegisterPage}
-                                        fullWidth={true}
-                                        variant="outlined"
-                                        color="default"
-                                        className={this.props.classes.submitButtonMarginTop}
-                                    >
-                                        Create Account
-                                    </Button>
-                                </Grid>
-                                <Grid item={true} xs={4}/>
-                                <Grid item={true} xs={4}>
-                                    <Button
-                                        size={"large"}
-                                        onClick={this.login}
-                                        fullWidth={true}
-                                        variant="outlined"
-                                        color="primary"
-                                        className={this.props.classes.submitButtonMarginTop}
-                                    >
-                                        Login
-                                    </Button>
-                                </Grid>
+                        <Grid container={true}>
+                            <Grid item={true} xs={4}>
+                                <Button
+                                    size={"large"}
+                                    onClick={this.goToRegisterPage}
+                                    fullWidth={true}
+                                    variant="outlined"
+                                    color="default"
+                                    className={this.props.classes.submitButtonMarginTop}
+                                >
+                                    Create Account
+                                </Button>
                             </Grid>
-                        </Paper>
-                    </Grid>
-                    <Grid item={true} xs={4} />
+                            <Grid item={true} xs={4}/>
+                            <Grid item={true} xs={4}>
+                                <Button
+                                    size={"large"}
+                                    onClick={this.login}
+                                    fullWidth={true}
+                                    variant="outlined"
+                                    color="primary"
+                                    className={this.props.classes.submitButtonMarginTop}
+                                >
+                                    Login
+                                </Button>
+                            </Grid>
+                        </Grid>
+                    </Paper>
                 </Grid>
-            </form>
+                <Grid item={true} xs={4} />
+            </Grid>
         );
     }
 
@@ -93,11 +94,33 @@ class LoginPage extends React.Component<IProps & WithStyles & RouteComponentProp
     };
 
     private login = () => {
-        this.props.login(this.state.username, this.state.password);
+        this.props.submitForm(FORM_NAME)
     };
+
+    private handleSubmit = (values: IFormFields) => {
+        const errors: IFormFields = {};
+
+        if (!values.username) {
+            errors.username = EMPTY_FIELD_ERROR;
+        }
+
+        if (!values.password) {
+            errors.password = EMPTY_FIELD_ERROR;
+        }
+
+        if (!_.isEmpty(errors)) {
+            throw new SubmissionError(errors);
+        }
+
+        if (values.username && values.password) {
+            this.props.login(values.password, values.password);
+            console.log(values);
+        }
+    }
 
 }
 
 export default withRouter(connect(null, {
-    login: loginAction
+    login: loginAction,
+    submitForm
 })(withStyles(styles)(LoginPage)));
