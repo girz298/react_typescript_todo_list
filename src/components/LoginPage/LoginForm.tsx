@@ -39,7 +39,7 @@ class LoginForm extends React.Component<IProps & WithStyles & RouteComponentProp
     public render() {
         return (
             <form noValidate={true} autoComplete="off" className={this.props.classes.bigMarginTop}>
-                <Grid container={true} spacing={8}>
+                <Grid container={true}>
                     <Grid item={true} xs={4} />
                     <Grid item={true} xs={4}>
                         <Paper className={this.props.classes.paperPadding}>

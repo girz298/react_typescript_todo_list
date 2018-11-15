@@ -12,17 +12,20 @@ interface IReduxTextField {
     }
 }
 
+// TODO: Fix bug with <p> cannot appear as a descendant of <p>
+
 export const renderTextField = ({input, label, meta: { touched, error }, ...custom}: IReduxTextField & TextFieldProps) => {
     return (
         <TextField
             label={label}
-            error={error && true}
+            error={!!error}
             {...input}
             {...custom}
-            helperText={ error &&
-                <FormHelperText>
-                {error}
+            helperText={ error && (
+                <FormHelperText error={!!error}>
+                    {error}
                 </FormHelperText>
+                )
             }
         />
     );

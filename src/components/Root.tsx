@@ -8,7 +8,7 @@ class Root extends React.Component {
 
     public render() {
         return (
-            <Grid container={true} spacing={8}>
+            <Grid container={true}>
                 <Grid item={true} xs={4} />
                 <Grid item={true} xs={4}>
                     <CreateProjectForm />

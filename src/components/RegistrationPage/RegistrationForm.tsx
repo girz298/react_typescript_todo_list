@@ -6,6 +6,12 @@ import {Grid} from "@material-ui/core";
 
 export const FORM_NAME = 'RegistrationForm';
 
+interface IFormFields {
+    username?: string;
+    password?: string;
+    repeatPassword?: string;
+}
+
 interface IProps {
     className?: string;
 }
@@ -41,7 +47,7 @@ class RegistrationForm extends React.Component<IProps & InjectedFormProps<{}, IP
                         <Field
                             component={renderTextField}
                             label="Repeat password"
-                            name="repeat_password"
+                            name="repeatPassword"
                             type={"password"}
                             required={true}
                             fullWidth={true}
@@ -56,7 +62,29 @@ class RegistrationForm extends React.Component<IProps & InjectedFormProps<{}, IP
 
 export default reduxForm<{}, IProps>({
     form: FORM_NAME,
-    validate: values => {
-        return {};
+    validate: (values: IFormFields) => {
+        const errors: IFormFields = {};
+        const passwordsDontMatchErrorMessage: string = 'Password don\'t match.';
+
+        if (values.password && values.password.length < 8) {
+            errors.password = 'Length should be more than 8';
+        }
+
+        if (values.repeatPassword && values.repeatPassword.length < 8) {
+            errors.repeatPassword = 'Length should be more than 8';
+        }
+
+        if (errors.password || errors.repeatPassword) {
+            return errors;
+        }
+
+
+        if (values.password !== values.repeatPassword) {
+            errors.password = passwordsDontMatchErrorMessage;
+            errors.repeatPassword = passwordsDontMatchErrorMessage;
+        }
+
+        console.log('ERROR: ', errors);
+        return errors;
     }
 })(RegistrationForm);

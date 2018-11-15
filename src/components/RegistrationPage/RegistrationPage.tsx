@@ -41,7 +41,7 @@ class RegistrationPage extends React.Component<IProps & WithStyles & RouteCompon
 
     public render() {
         return (
-            <Grid container={true} spacing={8} className={this.props.classes.bigMarginTop}>
+            <Grid container={true} className={this.props.classes.bigMarginTop}>
                 <Grid item={true} xs={4} />
                 <Grid item={true} xs={4}>
                     <Paper className={this.props.classes.paperPadding}>
@@ -74,7 +74,7 @@ class RegistrationPage extends React.Component<IProps & WithStyles & RouteCompon
                             <Grid item={true} xs={4}>
                                 <Button
                                     size={"large"}
-                                    onClick={this.login}
+                                    onClick={this.register}
                                     fullWidth={true}
                                     variant="outlined"
                                     color="primary"
@@ -95,7 +95,7 @@ class RegistrationPage extends React.Component<IProps & WithStyles & RouteCompon
         this.props.history.push(GuestRoutes.LOGIN_PAGE);
     };
 
-    private login = () => {
+    private register = () => {
         this.props.submitForm(FORM_NAME);
     };
 
